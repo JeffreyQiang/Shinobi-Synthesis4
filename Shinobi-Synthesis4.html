@@ -1464,7 +1464,7 @@ function executeTurnEndAndBroadcast() {
 }
 
 // ============================================================
-//  角色选择（修复1：联机时对手不显示具体角色，也无金色边框）
+//  角色选择（修复1：联机时对手不显示具体角色）
 // ============================================================
 function startRoleSelection(role) {
     document.getElementById('lobby-screen').style.display = 'none';
@@ -1497,23 +1497,22 @@ function renderRoleSelection() {
         for (var ri = 0; ri < ROLE_KEYS.length; ri++) {
             var role = ROLES[ROLE_KEYS[ri]];
             var btn = document.createElement('button');
-            var isSelected = false;
-            var isDisabled = false;
+            var isSelected = selectedRoles.p1.indexOf(role.id) !== -1;
+            var isDisabled = !isSelected && selectedRoles.p1.length >= 2;
             var isLocal = isP1Local;
+            btn.className = 'role-btn' + (isSelected ? ' selected' : '') + (isDisabled || !isLocal ? ' disabled' : '');
             if (isLocal) {
-                isSelected = selectedRoles.p1.indexOf(role.id) !== -1;
-                isDisabled = !isSelected && selectedRoles.p1.length >= 2;
                 btn.innerHTML = '<div class="role-name">' + role.emoji + ' ' + role.name +
                     ' <span style="font-size:12px;color:#7a6a5a;">(' + role.faction + ')</span></div><div class="role-skill">技能：' +
                     role.skillName + ' — <span>' + role.skillDesc + '</span></div>';
             } else {
+                // 非本地玩家：不显示具体角色信息
                 var selectedCount = selectedRoles.p1.length;
                 var displayText = selectedCount > 0 ? '✅ 已选 ' + selectedCount + ' 名' : '⏳ 等待对手选择...';
                 btn.innerHTML = '<div class="role-name" style="color:#5a4a3a;">❓ ' + displayText + '</div>';
                 btn.disabled = true;
-                isDisabled = true;
+                btn.className += ' disabled';
             }
-            btn.className = 'role-btn' + (isSelected ? ' selected' : '') + (isDisabled ? ' disabled' : '');
             btn.onclick = (function(r) {
                 return function() {
                     if (isDisabled || !isLocal) return;
@@ -1527,17 +1526,15 @@ function renderRoleSelection() {
             })(role);
             p1List.appendChild(btn);
         }
-
         // ---- 玩家二列 ----
         for (var ri2 = 0; ri2 < ROLE_KEYS.length; ri2++) {
             var role2 = ROLES[ROLE_KEYS[ri2]];
             var btn2 = document.createElement('button');
-            var isSelected2 = false;
-            var isDisabled2 = false;
+            var isSelected2 = selectedRoles.p2.indexOf(role2.id) !== -1;
+            var isDisabled2 = !isSelected2 && selectedRoles.p2.length >= 2;
             var isLocal2 = isP2Local;
+            btn2.className = 'role-btn' + (isSelected2 ? ' selected' : '') + (isDisabled2 || !isLocal2 ? ' disabled' : '');
             if (isLocal2) {
-                isSelected2 = selectedRoles.p2.indexOf(role2.id) !== -1;
-                isDisabled2 = !isSelected2 && selectedRoles.p2.length >= 2;
                 btn2.innerHTML = '<div class="role-name">' + role2.emoji + ' ' + role2.name +
                     ' <span style="font-size:12px;color:#7a6a5a;">(' + role2.faction + ')</span></div><div class="role-skill">技能：' +
                     role2.skillName + ' — <span>' + role2.skillDesc + '</span></div>';
@@ -1546,9 +1543,8 @@ function renderRoleSelection() {
                 var displayText2 = selectedCount2 > 0 ? '✅ 已选 ' + selectedCount2 + ' 名' : '⏳ 等待对手选择...';
                 btn2.innerHTML = '<div class="role-name" style="color:#5a4a3a;">❓ ' + displayText2 + '</div>';
                 btn2.disabled = true;
-                isDisabled2 = true;
+                btn2.className += ' disabled';
             }
-            btn2.className = 'role-btn' + (isSelected2 ? ' selected' : '') + (isDisabled2 ? ' disabled' : '');
             btn2.onclick = (function(r) {
                 return function() {
                     if (isDisabled2 || !isLocal2) return;
