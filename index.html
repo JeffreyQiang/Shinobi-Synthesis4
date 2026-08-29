@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>跳转中…</title>
-    <!-- 0 秒后刷新到目标地址 -->
-    <meta http-equiv="refresh" content="0; url=Shinobi-Synthesis4.html/">
+    <title>跳转中 · Shinobi Synthesis</title>
+    <!-- 0 秒后刷新到目标文件 -->
+    <meta http-equiv="refresh" content="0; url=Shinobi-Synthesis4.html">
     <style>
         body {
             background: #0a0806;
@@ -25,16 +25,24 @@
         a:hover {
             text-decoration: underline;
         }
+        .loading {
+            font-size: 1.2rem;
+        }
+        .sub {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #8a7a6a;
+        }
     </style>
 </head>
 <body>
     <div>
-        <p>⏳ 正在前往 <strong>Shinobi-Synthesis4</strong> …</p>
-        <p>如果未自动跳转，请 <a href="Shinobi-Synthesis4/">点击此处</a>。</p>
+        <p class="loading">⏳ 正在前往 <strong>Shinobi-Synthesis4</strong> …</p>
+        <p class="sub">如果未自动跳转，请 <a href="Shinobi-Synthesis4.html">点击此处</a>。</p>
     </div>
-    <!-- JavaScript 备用重定向 -->
+    <!-- JavaScript 备用重定向（优先级最高） -->
     <script>
-        window.location.replace("Shinobi-Synthesis4/");
+        window.location.replace("Shinobi-Synthesis4.html");
     </script>
 </body>
 </html>
