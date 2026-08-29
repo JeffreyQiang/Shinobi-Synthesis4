@@ -1467,11 +1467,6 @@ function executeTurnEndAndBroadcast() {
 //  角色选择（修复1：联机时对手不显示具体角色，也无金色边框）
 // ============================================================
 function startRoleSelection(role) {
-    // ===== 修复：根据角色强制设置 localPlayerId =====
-    if (role === 'host') localPlayerId = 1;
-    else if (role === 'guest') localPlayerId = 2;
-    // 其他情况（如本地模式）保持原样
-
     document.getElementById('lobby-screen').style.display = 'none';
     document.getElementById('role-select-screen').style.display = 'block';
     document.getElementById('role-p1-title').textContent = role === 'host' ? '👹 玩家一 (房主)' : '👹 玩家一';
